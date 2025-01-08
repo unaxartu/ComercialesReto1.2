@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:orientation="vertical"
+    android:background="@color/menu_background"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/agendaButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agenda"
+        android:backgroundTint="@color/menu_button"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/partnersButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Partners"
+        android:backgroundTint="@color/menu_button"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/ordersButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pedidos"
+        android:backgroundTint="@color/menu_button"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/sendDelegationsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar Delegaciones"
+        android:backgroundTint="@color/menu_button" />
+
+    <!-- Botón de cerrar el menú con un icono de X -->
+    <ImageButton
+        android:id="@+id/closeMenuButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="end"
+        android:src="@drawable/ic_close"
+    android:background="?android:attr/selectableItemBackgroundBorderless"
+    android:contentDescription="Cerrar Menú"
+    android:layout_marginTop="16dp"/>
+</LinearLayout>
