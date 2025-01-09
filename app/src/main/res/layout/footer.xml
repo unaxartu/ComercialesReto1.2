@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="8dp"
+    android:background="@color/footer_background">
+
+    <!-- Correo Icon -->
+    <ImageButton
+        android:id="@+id/email_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_weight="1"
+        android:contentDescription="Correo"
+        android:src="@drawable/ic_email"/>
+
+    <!-- Ubicación Icon -->
+    <ImageButton
+        android:id="@+id/location_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    android:src="@drawable/ic_location"
+    android:contentDescription="Ubicación"/>
+
+
+    <!-- Teléfono Icon -->
+    <ImageButton
+        android:id="@+id/phoneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_weight="1"
+        android:src="@drawable/ic_phone"
+        android:contentDescription="Teléfono" />
+
+
+</LinearLayout>

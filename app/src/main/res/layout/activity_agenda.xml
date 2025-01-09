@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText para la fecha de inicio -->
+    <EditText
+        android:id="@+id/start_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha de inicio"
+        android:inputType="date" />
+
+    <!-- EditText para la fecha de finalización -->
+    <EditText
+        android:id="@+id/end_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha de finalización"
+        android:inputType="date" />
+
+    <!-- Botón para buscar eventos -->
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buscar" />
+
+    <!-- GridView para mostrar el calendario o eventos -->
+    <GridView
+        android:id="@+id/calendar_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:numColumns="7"
+        android:verticalSpacing="2dp"
+        android:horizontalSpacing="2dp"
+        android:stretchMode="columnWidth" />
+
+    <!-- Botón para crear un nuevo evento -->
+    <Button
+        android:id="@+id/create_event_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Evento" />
+</LinearLayout>
