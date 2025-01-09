@@ -1,9 +1,5 @@
 package com.example.comercialesreto12;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.core.view.GravityCompat;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.graphics.insets.Insets;
+import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -48,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Cerrar el menú cuando se presiona el botón "Cerrar Menú"
         ImageButton closeMenuButton = findViewById(R.id.closeMenuButton);
-
-        // Acción para cerrar el menú cuando se haga clic en el botón de cerrar
         closeMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Acción para abrir la aplicación de correo
         ImageButton emailIcon = findViewById(R.id.email_icon);  // Referencia al ImageButton de correo
-
         emailIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Acción para abrir la ubicación en Google Maps
         ImageButton locationIcon = findViewById(R.id.location_icon);  // Referencia al ImageButton de ubicación
-
         locationIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Acción para abrir la aplicación del teléfono y realizar una llamada
         ImageButton phoneButton = findViewById(R.id.phoneButton); // Referencia al ImageButton del teléfono
-
         phoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,5 +121,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Ajustar la ventana para los márgenes del sistema
+        View mainView = findViewById(R.id.main);
+        if (mainView != null) {
+            ViewCompat.setOnApplyWindowInsetsListener(mainView, (v, insets) -> {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                return insets;
+            });
+        }
+    }
+
+    // Método para ir a la agenda
+    public void agenda() {
+        Intent i = new Intent(this, Agenda.class);
+        startActivity(i);
     }
 }
