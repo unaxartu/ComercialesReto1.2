@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@color/header_background"
+    android:gravity="center_vertical">
+
+    <!-- Menú en el lado izquierdo -->
+    <ImageButton
+        android:id="@+id/menuButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@null"
+        android:src="@drawable/ic_menu"
+        android:contentDescription="Menu" />
+
+    <!-- Logo de la empresa centrado -->
+    <ImageView
+        android:layout_width="302dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:contentDescription="Logo de la empresa"
+        android:src="@drawable/logo_empresa" />
+
+    <!-- Icono de info a la derecha -->
+    <ImageButton
+        android:id="@+id/infoButton"
+        android:layout_width="44dp"
+        android:layout_height="43dp"
+        android:background="@null"
+        android:contentDescription="Información"
+        android:src="@drawable/ic_info" />
+</LinearLayout>
