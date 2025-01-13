@@ -5,11 +5,12 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ComercialesReto12">
+        android:theme="@style/Base.Theme.ComercialesReto12"
+        android:icon="@drawable/greengetaways">
 
         <!-- Declaración de la actividad principal -->
         <activity
-            android:name=".MainActivity"
+            android:name=".PrincipalActivity"
             android:exported="true"> <!-- Añadir android:exported="true" para cumplir con las últimas directrices -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +20,12 @@
 
         <!-- Declaración de la actividad Agenda -->
         <activity android:name=".Agenda" />
+        <activity android:name=".Partners"/>
+        <activity android:name=".Pedidos"/>
+        <activity android:name=".EnviarDelegacion"/>
+        <activity android:name=".Login"/>
+        <activity android:name=".ConsultaPartner"/>
+        <activity android:name=".AltaPartner"/>
     </application>
 
 </manifest>
