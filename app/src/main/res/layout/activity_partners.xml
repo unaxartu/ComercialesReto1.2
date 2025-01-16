@@ -19,38 +19,35 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Título para la agenda -->
+            <!-- Título para Partners -->
             <TextView
-                android:id="@+id/agenda_title"
+                android:id="@+id/partners_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mi Agenda"
+                android:text="Gestionar Partners"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_margin="16dp" />
 
-            <!-- Vista de calendario -->
-            <CalendarView
-                android:id="@+id/calendar_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
-
-            <!-- Lista de eventos seleccionados -->
-            <ListView
-                android:id="@+id/event_list_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:padding="8dp" />
-
-            <!-- Botón para agregar un nuevo evento -->
+            <!-- Botón de consulta de Partners -->
             <Button
-                android:id="@+id/add_event_button"
+                android:id="@+id/consultaPartners"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Agregar Evento"
+                android:text="Consulta de Partners"
+                android:backgroundTint="@color/grey"
+                android:textColor="@color/black"
+                android:layout_margin="16dp"/>
+
+            <!-- Botón de alta de nuevo Partner -->
+            <Button
+                android:id="@+id/altaPartner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alta de nuevo Partner"
+                android:backgroundTint="@color/grey"
+                android:textColor="@color/black"
                 android:layout_margin="16dp" />
         </LinearLayout>
 
