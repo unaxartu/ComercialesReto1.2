@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/paisaje_con_montanas">
+
+    <!-- Title TextView -->
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="@color/grey"
+        android:gravity="center"
+        android:text="Dar de alta al Partner"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <!-- Nombre TextView -->
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Nombre"
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/textView14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <!-- Nombre EditText -->
+    <EditText
+        android:id="@+id/fieldName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/textView15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <!-- Apellidos TextView -->
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Apellidos"
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/fieldName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <!-- Apellidos EditText -->
+    <EditText
+        android:id="@+id/fielApellidos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/textView16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <!-- Direccion TextView -->
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Direccion"
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/fielApellidos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <!-- Direccion EditText -->
+    <EditText
+        android:id="@+id/fieldDireccion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/textView17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <!-- Telefono TextView -->
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Telefono"
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/fieldDireccion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <!-- Telefono EditText -->
+    <EditText
+        android:id="@+id/fieldTelefono"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/textView18"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <!-- Email TextView -->
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Email"
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/fieldTelefono"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <!-- Email EditText -->
+    <EditText
+        android:id="@+id/fieldEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="nombre@gmail.com"
+        android:background="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/textView19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <!-- Button for registration -->
+    <Button
+        android:id="@+id/buttonDarseDeAlta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dar de alta"
+        android:backgroundTint="@color/grey"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/fieldEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <!-- Back arrow ImageButton -->
+    <ImageButton
+        android:id="@+id/flechaAtras"
+        android:layout_width="51dp"
+        android:layout_height="49dp"
+        android:src="@drawable/flecha_atras_pedidos"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.05"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

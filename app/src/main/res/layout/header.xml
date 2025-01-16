@@ -17,12 +17,17 @@
         android:contentDescription="Menu" />
 
     <!-- Logo de la empresa centrado -->
-    <ImageView
-        android:layout_width="302dp"
+    <ImageButton
+        android:id="@+id/logo_empresa"
+        android:layout_width="301dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:contentDescription="Logo de la empresa"
+        android:background="@null"
+        android:contentDescription="logo"
+        android:scaleType="fitCenter"
         android:src="@drawable/logo_empresa" />
+
+
 
     <!-- Icono de info a la derecha -->
     <ImageButton
