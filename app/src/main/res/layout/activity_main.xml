@@ -3,6 +3,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".MainActivity"
     android:background="@drawable/paisaje_con_montanas">
 
     <!-- Contenido principal -->
@@ -11,6 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- Incluir encabezado -->
         <include layout="@layout/header" />
 
         <RelativeLayout
@@ -18,6 +20,7 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
+            <!-- Imagen de fondo -->
             <ImageView
                 android:id="@+id/backgroundImage"
                 android:layout_width="match_parent"
@@ -25,6 +28,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/paisaje_con_montanas" /> <!-- Imagen de fondo -->
 
+            <!-- Texto centrado sobre la imagen -->
             <TextView
                 android:layout_width="354dp"
                 android:layout_height="274dp"
@@ -36,7 +40,7 @@
                 android:textSize="18sp" />
         </RelativeLayout>
 
-
+        <!-- Incluir pie de página -->
         <include layout="@layout/footer" />
     </LinearLayout>
 
