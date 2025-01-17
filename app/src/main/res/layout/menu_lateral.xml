@@ -6,7 +6,8 @@
     android:layout_gravity="start"
     android:orientation="vertical"
     android:background="@color/menu_background"
-    android:padding="16dp">
+    android:padding="16dp"
+    >
 
     <ImageButton
         android:id="@+id/closeMenuButton"

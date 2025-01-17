@@ -38,6 +38,7 @@ public class AgendaActivity extends MainActivity {  // Hereda de MainActivity
         // Inicialización de vistas y eventos
         initializeViews();
         initializeEvents();
+
     }
 
     private void initializeViews() {
@@ -112,4 +113,5 @@ public class AgendaActivity extends MainActivity {  // Hereda de MainActivity
         // Formato de fecha "YYYY-MM-DD"
         return year + "-" + (month + 1) + "-" + dayOfMonth;
     }
+
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.comercialesreto12">
 
     <!-- Permiso para acceder a Internet (si es necesario para la app) -->
@@ -7,6 +8,7 @@
 
     <application
         android:allowBackup="true"
+        android:icon="@drawable/logo_empresa"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.ComercialesReto12"
@@ -35,10 +37,7 @@
         <activity android:name=".EnviarDelegacion" />
 
         <!-- Declaración de la actividad Maps -->
-        <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
+
 
     </application>
 
