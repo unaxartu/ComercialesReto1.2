@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.comercialesreto12">
 
     <!-- Permiso para acceder a Internet (si es necesario para la app) -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ComercialesReto12"
-        android:targetSdkVersion="33    "
-    tools:targetApi="31">
+        android:targetSdkVersion="33"
+        tools:targetApi="31">
 
-    <!-- Reemplaza YOUR_API_KEY con tu clave de API real de Google Maps -->
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="YOUR_API_KEY" />
+        <!-- Reemplaza YOUR_API_KEY con tu clave de API real de Google Maps -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR_API_KEY" />
 
-    <!-- Actividad principal -->
-    <activity
-        android:name=".MainActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+        <!-- Actividad principal -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-    <!-- Actividades adicionales -->
-    <activity android:name=".AgendaActivity" />
-    <activity android:name=".PartnersActivity" />
-    <activity android:name=".PedidosActivity" />
-    <activity android:name=".EnviarDelegacion" />
+        <!-- Actividades adicionales -->
+        <activity android:name=".AgendaActivity" />
+        <activity android:name=".PartnersActivity" />
+        <activity android:name=".PedidosActivity" />
+        <activity android:name=".EnviarDelegacion" />
 
-</application>
+        <!-- Declaración de la actividad Maps -->
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
 
-    </manifest>
+    </application>
+
+</manifest>
