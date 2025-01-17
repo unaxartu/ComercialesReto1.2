@@ -8,11 +8,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.graphics.insets.Insets;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 public class MainActivity extends AppCompatActivity {
     protected DrawerLayout drawerLayout;
@@ -66,21 +63,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Cerrar el menú cuando se presiona el botón "Cerrar Menú"
         ImageButton closeMenuButton = findViewById(R.id.closeMenuButton);
         closeMenuButton.setOnClickListener(v -> drawerLayout.closeDrawer(GravityCompat.START));
-
-        // Acción para abrir la aplicación de correo
-        ImageButton emailIcon = findViewById(R.id.email_icon);  // Referencia al ImageButton de correo
-        emailIcon.setOnClickListener(v -> openEmailApp());
-
-        // Acción para abrir la ubicación en Google Maps
-        ImageButton locationIcon = findViewById(R.id.location_icon);  // Referencia al ImageButton de ubicación
-        locationIcon.setOnClickListener(v -> openGoogleMaps());
-
-        // Acción para abrir la aplicación del teléfono y realizar una llamada
-        ImageButton phoneButton = findViewById(R.id.phoneButton); // Referencia al ImageButton del teléfono
-        phoneButton.setOnClickListener(v -> makePhoneCall());
     }
 
     public void openEmailApp() {
@@ -150,11 +134,5 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, "No hay navegador disponible", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    // Método para ir a la agenda
-    public void agenda() {
-        Intent i = new Intent(this, Agenda.class);
-        startActivity(i);
     }
 }
