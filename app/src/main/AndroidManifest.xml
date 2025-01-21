@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.comercialesreto12">
 
-    <!-- Permiso para acceder a Internet (si es necesario para la app) -->
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -18,9 +17,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="YOUR_API_KEY" />
 
-        <!-- Actividad principal -->
+        <!-- Actividad principal (Login) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,16 +28,11 @@
         </activity>
 
         <!-- Actividades adicionales -->
+        <activity android:name=".MainActivity" />
         <activity android:name=".AgendaActivity" />
         <activity android:name=".PartnersActivity" />
         <activity android:name=".PedidosActivity" />
         <activity android:name=".EnviarDelegacion" />
-
-        <!-- Declaración de la actividad Maps -->
-        <activity
-            android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
 
     </application>
 
