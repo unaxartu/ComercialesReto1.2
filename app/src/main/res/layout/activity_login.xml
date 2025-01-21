@@ -34,7 +34,7 @@
         app:layout_constraintVertical_bias="0.065" />
 
     <EditText
-        android:id="@+id/editTextText16"
+        android:id="@+id/username"
         android:layout_width="160dp"
         android:layout_height="38dp"
         android:ems="10"
@@ -61,7 +61,7 @@
         app:srcCompat="@drawable/contrasena" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/loginButton"
         android:layout_width="118dp"
         android:layout_height="54dp"
         android:text="Login"
@@ -75,7 +75,7 @@
         android:textColor="@color/black"/>
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/password"
         android:layout_width="159dp"
         android:layout_height="39dp"
         android:background="@color/grey"
