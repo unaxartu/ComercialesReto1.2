@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/paisaje_con_montanas">
+   >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Imagen de fondo -->
+        <ImageView
+            android:src="@drawable/paisaje_con_montanas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <!-- Capa oscura con menor opacidad -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000" /> <!-- Color negro con opacidad moderada -->
+    </FrameLayout>
 
     <!-- Contenido principal de la actividad -->
     <LinearLayout
@@ -15,9 +33,11 @@
         <include layout="@layout/header" />
 
         <!-- Contenido principal -->
+
+        <!-- Pie de página del menú (footer) -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="629dp"
             android:orientation="vertical">
 
             <!-- Título para los pedidos -->
@@ -25,154 +45,159 @@
                 android:id="@+id/pedidos_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center"
                 android:text="Orden de Pedido"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:gravity="center"
-                android:layout_margin="16dp" />
+                android:textColor="@color/white"/>
 
             <!-- Vista de formulario para completar los detalles del pedido -->
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Organiza y procesa tus pedidos"
-                android:textColor="@color/black"
-                android:textSize="14sp"
                 android:layout_margin="16dp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:text="Organiza y procesa tus pedidos"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Fecha: "
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/editTextText3"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="08/10/2024"
-                android:inputType="date"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Campo de nombre de la empresa -->
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Nombre de la empresa"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/fieldNameEmpresa"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="Ingrese el nombre"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Campo de nombre de contacto -->
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Nombre del contacto"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/fieldNameContacto"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="Ingrese el contacto"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Campo de dirección -->
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Dirección"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/fieldDireccion"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="Ingrese la dirección"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Campo de teléfono -->
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Teléfono"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/fieldTelefono"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="Ingrese el teléfono"
-                android:inputType="phone"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Campo de email -->
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Email"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/fieldEmail"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="nombre@correo.com"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Botón para enviar el pedido -->
-            <Button
-                android:id="@+id/botonPedido"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Enviar Pedido"
-                android:layout_margin="16dp" />
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:id="@+id/containerPedidos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha: "
+                        android:textColor="@color/white"
+                        android:layout_margin="8dp" />
+
+                    <EditText
+                        android:id="@+id/editTextText3"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+
+                        android:hint="08/10/2024"
+                        android:inputType="date"
+                        android:textColorHint="@color/white"
+                        android:layout_margin="8dp" />
+
+                    <!-- Campo de nombre de la empresa -->
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre de la empresa"
+                        android:textColor="@color/white"
+                        android:layout_margin="8dp" />
+
+                    <!-- Campo de nombre de contacto -->
+                    <Spinner
+                        android:id="@+id/spinner2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre del contacto"
+                        android:textColor="@color/white"
+                        android:layout_margin="8dp" />
+
+                    <!-- Campo de dirección -->
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dirección"
+                        android:textColor="@color/white"
+                        android:layout_margin="8dp" />
+
+                    <EditText
+                        android:id="@+id/fieldDireccion"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingrese la dirección"
+                        android:inputType="text"
+                        android:textColorHint="@color/white"
+                        android:layout_margin="8dp" />
+
+                    <!-- Campo de teléfono -->
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Teléfono"
+                        android:textColor="@color/white"
+                        android:layout_margin="8dp" />
+
+                    <EditText
+                        android:id="@+id/fieldTelefono"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingrese el teléfono"
+                        android:inputType="phone"
+                        android:textColorHint="@color/white"
+                        android:layout_margin="8dp" />
+
+                    <!-- Campo de email -->
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textColor="@color/white"
+                        android:layout_margin="8dp" />
+
+                    <EditText
+                        android:id="@+id/fieldEmail"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:hint="nombre@correo.com"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="@color/white"
+                        android:layout_margin="8dp" />
+
+
+                    <!-- Botón para enviar el pedido -->
+
+                    <ImageButton
+                        android:id="@+id/ImagebtnAddPedido"
+                        android:layout_width="35dp"
+                        android:layout_height="31dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/anadir_pedido" />
+
+                    <Button
+                        android:id="@+id/botonPedido"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Enviar Pedido"
+                        android:layout_margin="10dp" />
+
+
+                </LinearLayout>
+            </ScrollView>
 
         </LinearLayout>
 
-        <!-- Pie de página del menú (footer) -->
         <include layout="@layout/footer" />
 
     </LinearLayout>

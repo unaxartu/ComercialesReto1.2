@@ -3,7 +3,25 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/paisaje_con_montanas">
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Imagen de fondo -->
+        <ImageView
+            android:src="@drawable/paisaje_con_montanas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <!-- Capa oscura con menor opacidad -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000" /> <!-- Color negro con opacidad moderada -->
+    </FrameLayout>
 
     <!-- Contenido principal de la actividad -->
     <LinearLayout
@@ -26,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mi Agenda"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -36,8 +55,7 @@
                 android:id="@+id/calendar_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@color/grey"/>
+                android:layout_margin="8dp"/>
 
             <!-- Lista de eventos seleccionados -->
             <ListView
@@ -45,8 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:padding="8dp"
-                android:background="@color/grey"/>
+                android:padding="8dp"/>
 
             <!-- Botón para agregar un nuevo evento -->
             <Button

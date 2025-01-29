@@ -5,7 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/paisaje_con_montanas">
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Imagen de fondo -->
+        <ImageView
+            android:src="@drawable/paisaje_con_montanas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <!-- Capa oscura con menor opacidad -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000" /> <!-- Color negro con opacidad moderada -->
+    </FrameLayout>
 
     <!-- Contenido principal -->
     <LinearLayout

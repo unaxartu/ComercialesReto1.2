@@ -4,7 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/paisaje_con_montanas">
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Imagen de fondo -->
+        <ImageView
+            android:src="@drawable/paisaje_con_montanas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <!-- Capa oscura con menor opacidad -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000" /> <!-- Color negro con opacidad moderada -->
+    </FrameLayout>
 
     <!-- Title TextView -->
     <TextView
@@ -14,7 +32,7 @@
         android:background="@color/grey"
         android:gravity="center"
         android:text="Dar de alta al Partner"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="Nombre"
-        android:background="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/textView14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,8 +61,9 @@
         android:ems="10"
         android:inputType="text"
         android:text=""
-        android:background="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="nombre del usuario"
         app:layout_constraintTop_toBottomOf="@id/textView15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,8 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="Apellidos"
-        android:background="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/fieldName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,8 +91,9 @@
         android:ems="10"
         android:inputType="text"
         android:text=""
-        android:background="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="apellidos del usuario"
         app:layout_constraintTop_toBottomOf="@id/textView16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,8 +106,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="Direccion"
-        android:background="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/fielApellidos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,8 +121,9 @@
         android:ems="10"
         android:inputType="text"
         android:text=""
-        android:background="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="nombre de la calle donde vives"
         app:layout_constraintTop_toBottomOf="@id/textView17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,8 +136,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="Telefono"
-        android:background="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/fieldDireccion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,8 +151,9 @@
         android:ems="10"
         android:inputType="text"
         android:text=""
-        android:background="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="+34 607617363"
         app:layout_constraintTop_toBottomOf="@id/textView18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -148,8 +166,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:text="Email"
-        android:background="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/fieldTelefono"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -164,8 +181,8 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="nombre@gmail.com"
-        android:background="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintTop_toBottomOf="@id/textView19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -178,8 +195,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dar de alta"
-        android:backgroundTint="@color/grey"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/fieldEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -195,5 +211,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintHorizontal_bias="0.05"/>
+        app:layout_constraintHorizontal_bias="0.05"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
