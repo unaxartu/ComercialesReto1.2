@@ -1,89 +1,198 @@
 package com.example.comercialesreto12;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.comercialesreto12.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class PedidosActivity extends MainActivity {
+import java.util.List;
+
+public class PedidosActivity extends AppCompatActivity {
 
     private LinearLayout containerPedidos; // Contenedor para los pedidos
-    private int pedidoCount = 1; // Contador para numerar los pedidos
+    private Spinner spinnerCliente; // Spinner para seleccionar cliente
+    private Spinner spinnerArticulos; // Spinner para seleccionar productos
+    private TextView empresaNombre, contactoNombre, direccionCliente, telefonoCliente, emailCliente;
+    private List<String> listaProductos; // Lista de productos disponibles
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos);
 
-        // Llama al menú lateral
-        setupDrawerMenu();
-
-        // Inicializa el contenedor y el botón
+        // Inicializa los componentes
         containerPedidos = findViewById(R.id.containerPedidos);
+        spinnerCliente = findViewById(R.id.spinnerCliente);
+        spinnerArticulos = findViewById(R.id.spinnerArticulos);
+        empresaNombre = findViewById(R.id.empresaNombre);
+        contactoNombre = findViewById(R.id.contactoNombre);
+        direccionCliente = findViewById(R.id.direccionCliente);
+        telefonoCliente = findViewById(R.id.telefonoCliente);
+        emailCliente = findViewById(R.id.emailCliente);
         ImageButton btnAddPedido = findViewById(R.id.ImagebtnAddPedido);
+        Button btnEnviarPedido = findViewById(R.id.botonPedido);
+
+        // Cargar productos en la lista para los pedidos
+        DBHandler dbHandler = new DBHandler(this);
+        listaProductos = dbHandler.obtenerProductos(); // Obtener productos desde la BD
+
+        // Verifica si la lista de productos está vacía
+        if (listaProductos.isEmpty()) {
+            Toast.makeText(this, "No hay productos disponibles", Toast.LENGTH_SHORT).show();
+        } else {
+            // Si hay productos, configurar el Spinner de productos
+            ArrayAdapter<String> adapterProductos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listaProductos);
+            adapterProductos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerArticulos.setAdapter(adapterProductos);
+        }
 
         // Configura el evento de clic para agregar pedidos
         btnAddPedido.setOnClickListener(v -> addNewPedido());
+
+        // Configura el evento de clic para enviar el pedido
+        btnEnviarPedido.setOnClickListener(v -> enviarPedido());
+
+        // Cargar los clientes en el Spinner desde la base de datos
+        loadClientes();
     }
 
     /**
-     * Método para agregar dinámicamente un nuevo pedido
+     * Método para cargar los clientes en el Spinner desde la base de datos
+     */
+    private void loadClientes() {
+        DBHandler dbHandler = new DBHandler(this);
+        List<String> nombresClientes = dbHandler.obtenerPartners(); // Obtiene los nombres de clientes
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, nombresClientes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCliente.setAdapter(adapter);
+
+        // Evento de selección para cargar los datos del cliente
+        spinnerCliente.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(android.widget.AdapterView<?> parentView, View view, int position, long id) {
+                String nombreCompleto = (String) parentView.getItemAtPosition(position);
+                cargarDetallesCliente(nombreCompleto);
+
+                // Mostrar el Spinner de productos cuando se selecciona un cliente
+                spinnerArticulos.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onNothingSelected(android.widget.AdapterView<?> parentView) {
+                // No hacer nada si no hay selección
+            }
+        });
+    }
+
+    /**
+     * Método para cargar los detalles del cliente cuando se selecciona del Spinner
+     */
+    private void cargarDetallesCliente(String nombreCompleto) {
+        DBHandler dbHandler = new DBHandler(this);
+
+        // Validar que haya al menos un nombre
+        String[] nombreArray = nombreCompleto.split(" ");
+        String nombre = nombreArray[0];
+        String apellido = (nombreArray.length > 1) ? nombreArray[1] : "";
+
+        Cliente cliente = dbHandler.obtenerClientePorNombreApellido(nombre, apellido);
+
+        if (cliente != null) {
+            empresaNombre.setText(cliente.getNombre());
+            contactoNombre.setText(cliente.getApellido());
+            telefonoCliente.setText(cliente.getTelefono());
+            emailCliente.setText(cliente.getEmail());
+        }
+    }
+
+    /**
+     * Método para agregar dinámicamente un nuevo pedido con un Spinner (producto) y un EditText (cantidad)
      */
     private void addNewPedido() {
-        pedidoCount++; // Incrementa el número de pedidos
-
-        // Crea un nuevo LinearLayout para el pedido
-        LinearLayout newPedidoLayout = new LinearLayout(this);
-        newPedidoLayout.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+        LinearLayout pedidoRow = new LinearLayout(this);
+        pedidoRow.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        layoutParams.setMargins(0, 16, 0, 16); // Añade un margen entre pedidos
-        newPedidoLayout.setLayoutParams(layoutParams);
+        rowParams.setMargins(0, 16, 0, 16); // Margen entre filas
+        pedidoRow.setLayoutParams(rowParams);
 
-        // Crea un TextView para el título del pedido
-        TextView textViewPedido = new TextView(this);
-        textViewPedido.setText("Pedido " + pedidoCount);  // Muestra el número del pedido
-        textViewPedido.setTextColor(getResources().getColor(android.R.color.black));
-        textViewPedido.setTextSize(18);  // Ajusta el tamaño del texto
-        textViewPedido.setLayoutParams(new LinearLayout.LayoutParams(
+        // Spinner para seleccionar el producto
+        Spinner spinnerProducto = new Spinner(this);
+        ArrayAdapter<String> adapterProductos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listaProductos);
+        adapterProductos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerProducto.setAdapter(adapterProductos);
+        LinearLayout.LayoutParams spinnerParams = new LinearLayout.LayoutParams(
+                0,  // Peso relativo
                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
+                2  // Peso de 2 para el Spinner (más espacio)
+        );
+        spinnerProducto.setLayoutParams(spinnerParams);
 
-        // Crea un EditText para ingresar los detalles del pedido
-        EditText editTextPedido = new EditText(this);
-        editTextPedido.setHint("Ingrese el pedido");
-        editTextPedido.setHintTextColor(Color.WHITE); // Establece el color del hint a blanco
-        editTextPedido.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-
-        // Crea un EditText para ingresar la cantidad del pedido
+        // EditText para ingresar la cantidad (solo números)
         EditText editTextCantidad = new EditText(this);
-        editTextCantidad.setHint("Ingrese la cantidad");
-        editTextCantidad.setHintTextColor(Color.WHITE); // Establece el color del hint a blanco
-        editTextCantidad.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
+        editTextCantidad.setHint("Cantidad");
+        editTextCantidad.setInputType(android.text.InputType.TYPE_CLASS_NUMBER); // Solo números
+        LinearLayout.LayoutParams editTextParams = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                1  // Peso de 1 para el EditText (menos espacio)
+        );
+        editTextCantidad.setLayoutParams(editTextParams);
 
-        // Añade el TextView, el EditText del pedido y la cantidad al nuevo LinearLayout
-        newPedidoLayout.addView(textViewPedido);
-        newPedidoLayout.addView(editTextPedido);
-        newPedidoLayout.addView(editTextCantidad);
+        // Agregar los elementos a la fila
+        pedidoRow.addView(spinnerProducto);
+        pedidoRow.addView(editTextCantidad);
 
-        // Añade el nuevo pedido al contenedor de pedidos
-        containerPedidos.addView(newPedidoLayout);
+        // Agregar la fila al contenedor de pedidos
+        containerPedidos.addView(pedidoRow);
+    }
 
-        // Verifica si el pedido fue añadido correctamente
-        Log.d("PedidosActivity", "Nuevo pedido agregado: Pedido " + pedidoCount);
+    /**
+     * Método para enviar el pedido (validación básica)
+     */
+    private void enviarPedido() {
+        boolean valid = true;
+
+        // Validar que cada pedido tenga un producto y una cantidad
+        for (int i = 0; i < containerPedidos.getChildCount(); i++) {
+            LinearLayout pedidoRow = (LinearLayout) containerPedidos.getChildAt(i);
+            Spinner spinnerProducto = (Spinner) pedidoRow.getChildAt(0);
+            EditText editTextCantidad = (EditText) pedidoRow.getChildAt(1);
+
+            String productoSeleccionado = (String) spinnerProducto.getSelectedItem();
+            String cantidad = editTextCantidad.getText().toString();
+
+            // Validar que la cantidad no esté vacía y que se haya seleccionado un producto
+            if (productoSeleccionado == null || cantidad.isEmpty()) {
+                valid = false;
+                break;
+            }
+        }
+
+        if (valid) {
+            Toast.makeText(this, "Pedido enviado correctamente", Toast.LENGTH_SHORT).show();
+            limpiarFormulario(); // Limpia el formulario después de enviar el pedido
+        } else {
+            Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Método para limpiar el formulario después de enviar un pedido
+     */
+    private void limpiarFormulario() {
+        // Limpiar el contenedor de pedidos
+        containerPedidos.removeAllViews();
     }
 }

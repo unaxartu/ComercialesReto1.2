@@ -1,135 +1,89 @@
 package com.example.comercialesreto12;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 
 public class Login extends AppCompatActivity {
 
     private EditText usernameEditText, passwordEditText;
-    private Button loginButton;
-    private OkHttpClient client;
+    private Button loginButton, showUsersButton;
+    private TextView connectionStatus, usersList;
+    private DBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize UI components
+        // Inicializar elementos de la interfaz
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
+        showUsersButton = findViewById(R.id.showUsersButton);
+        connectionStatus = findViewById(R.id.connectionStatus);
+        usersList = findViewById(R.id.usersList);
 
-        // Initialize HTTP client
-        client = new OkHttpClient();
+        // Inicializar base de datos
+        dbHandler = new DBHandler(this);
 
-        // Set up the login button
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Get the entered username and password
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
+        // Botón de Login
+        loginButton.setOnClickListener(v -> {
+            String username = usernameEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
 
-                // Call the method to login
-                try {
-                    loginToOdoo(username, password);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    showToast("Error in request.");
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(Login.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            } else {
+                if (checkLogin(username, password)) {
+                    Toast.makeText(Login.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                    connectionStatus.setText("Conectado como " + username);
+
+                    // Redirigir a MainActivity
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    intent.putExtra("username", username); // Enviar username a MainActivity
+                    startActivity(intent);
+                    finish(); // Cierra la actividad de login para que no se pueda volver atrás
+                } else {
+                    Toast.makeText(Login.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                    connectionStatus.setText("Error en el login");
                 }
             }
         });
     }
 
-    private void loginToOdoo(String username, String password) throws JSONException {
-        // Create JSON-RPC object
-        JSONObject json = new JSONObject();
-        json.put("jsonrpc", "2.0");
-        json.put("method", "call");
+    private boolean checkLogin(String username, String password) {
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+        String query = "SELECT id FROM usuarios_login WHERE username=? AND password=?";
+        Cursor cursor = db.rawQuery(query, new String[]{username, password});
 
-        JSONObject params = new JSONObject();
-        params.put("service", "object");
-        params.put("method", "execute_kw");
+        if (cursor.moveToFirst()) { // Si hay un resultado
+            int userId = cursor.getInt(0); // Obtener el ID del usuario
 
-        // Request arguments
-        JSONObject args = new JSONObject();
-        args.put("db", "Madagascar"); // Change this to your database name
-        args.put("uid", 2);  // User ID
-        args.put("password", "admin"); // Access password (for validation)
-        args.put("model", "res.users"); // User model
-        args.put("method", "search_read"); // Method to read users
-        args.put("args", new JSONArray().put(new JSONArray())); // Empty filter
+            // Guardar userId en SharedPreferences
+            SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("userId", userId);
+            editor.apply(); // Guarda los cambios
 
-        // Fields to return
-        JSONObject fields = new JSONObject();
-        fields.put("fields", new JSONArray().put("id").put("login").put("name").put("email"));
+            cursor.close();
+            db.close();
+            return true; // Inicio de sesión exitoso
+        }
 
-        // Structure the request
-        json.put("params", params);
-        json.put("id", 2);
-
-        // Make the HTTP request using OkHttp
-        RequestBody body = RequestBody.create(MediaType.parse("application/json"), json.toString());
-        Request request = new Request.Builder()
-                .url("remoto.cebanc.com:20203/jsonrpc") // Change this to your Odoo server URL
-                .post(body)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-                showToast("Connection error.");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String responseData = response.body().string();
-
-                    try {
-                        JSONObject jsonResponse = new JSONObject(responseData);
-                        if (jsonResponse.has("result")) {
-                            // Validate if the username and password are correct
-                            showToast("Login successful.");
-                            // Navigate to the next activity, if necessary
-                        } else {
-                            showToast("Incorrect credentials.");
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        showToast("Error processing response.");
-                    }
-                }
-            }
-        });
+        cursor.close();
+        db.close();
+        return false; // Usuario o contraseña incorrectos
     }
 
-    // Method to show a Toast message
-    private void showToast(final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }

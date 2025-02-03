@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -36,9 +35,7 @@
         android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.05"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Nombre TextView -->
     <TextView
@@ -48,27 +45,20 @@
         android:text="Nombre"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/textView14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Nombre EditText -->
     <EditText
         android:id="@+id/fieldName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:inputType="text"
-        android:text=""
+        android:hint="Nombre del usuario"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:hint="nombre del usuario"
         app:layout_constraintTop_toBottomOf="@id/textView15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Apellidos TextView -->
     <TextView
@@ -78,87 +68,43 @@
         android:text="Apellidos"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/fieldName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Apellidos EditText -->
     <EditText
-        android:id="@+id/fielApellidos"
+        android:id="@+id/fieldApellidos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:inputType="text"
-        android:text=""
+        android:hint="Apellidos del usuario"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:hint="apellidos del usuario"
         app:layout_constraintTop_toBottomOf="@id/textView16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Direccion TextView -->
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:text="Direccion"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/fielApellidos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.2"/>
-
-    <!-- Direccion EditText -->
-    <EditText
-        android:id="@+id/fieldDireccion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text=""
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:hint="nombre de la calle donde vives"
-        app:layout_constraintTop_toBottomOf="@id/textView17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.2"/>
-
-    <!-- Telefono TextView -->
+    <!-- Teléfono TextView -->
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:text="Telefono"
+        android:text="Teléfono"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/fieldDireccion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintTop_toBottomOf="@id/fieldApellidos"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Telefono EditText -->
+    <!-- Teléfono EditText -->
     <EditText
         android:id="@+id/fieldTelefono"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text=""
+        android:inputType="phone"
+        android:hint="+34 607617363"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
-        android:hint="+34 607617363"
         app:layout_constraintTop_toBottomOf="@id/textView18"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Email TextView -->
     <TextView
@@ -168,28 +114,22 @@
         android:text="Email"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/fieldTelefono"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Email EditText -->
     <EditText
         android:id="@+id/fieldEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="nombre@gmail.com"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintTop_toBottomOf="@id/textView19"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Button for registration -->
+    <!-- Botón de registro -->
     <Button
         android:id="@+id/buttonDarseDeAlta"
         android:layout_width="wrap_content"
@@ -198,10 +138,9 @@
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/fieldEmail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.05"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Back arrow ImageButton -->
+    <!-- Botón de regreso -->
     <ImageButton
         android:id="@+id/flechaAtras"
         android:layout_width="51dp"
@@ -209,8 +148,6 @@
         android:src="@drawable/flecha_atras_pedidos"
         android:scaleType="fitCenter"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintHorizontal_bias="0.05"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

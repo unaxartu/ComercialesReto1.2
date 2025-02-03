@@ -1,8 +1,9 @@
 package com.example.comercialesreto12;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -10,52 +11,85 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AltaPartner extends AppCompatActivity {
+public class AltaPartner extends PartnersActivity {
+
+    private EditText fieldName, fieldApellidos, fieldTelefono, fieldEmail;
+    private DBHandler dbHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alta_partners);  // Asegúrate de que 'alta_partner.xml' exista en tu carpeta 'res/layout'
+        setContentView(R.layout.activity_alta_partners);
+
+        dbHandler = new DBHandler(this); // Inicializar base de datos correctamente
+
+        inicializarVistas();
 
         ImageButton buttonBack = findViewById(R.id.flechaAtras);
         Button buttonDarseDeAlta = findViewById(R.id.buttonDarseDeAlta);
-        EditText fieldName = findViewById(R.id.fieldName);
-        EditText fielApellidos = findViewById(R.id.fielApellidos);
-        EditText filedDireccion = findViewById(R.id.fieldDireccion);
-        EditText fieldTelefono = findViewById(R.id.fieldTelefono);
-        EditText fieldEmail = findViewById(R.id.fieldEmail);
 
+        buttonBack.setOnClickListener(v -> finish());
 
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish(); // Cierra la actividad actual
+        buttonDarseDeAlta.setOnClickListener(v -> procesarRegistro());
+    }
+
+    private void inicializarVistas() {
+        fieldName = findViewById(R.id.fieldName);
+        fieldApellidos = findViewById(R.id.fieldApellidos); // Corregí el ID
+        fieldTelefono = findViewById(R.id.fieldTelefono);
+        fieldEmail = findViewById(R.id.fieldEmail);
+    }
+
+    private void procesarRegistro() {
+        if (validarCampos()) {
+            String nombre = fieldName.getText().toString().trim();
+            String apellidos = fieldApellidos.getText().toString().trim();
+            String telefono = fieldTelefono.getText().toString().trim();
+            String email = fieldEmail.getText().toString().trim();
+
+            // Verificar si el cliente ya existe
+            boolean existe = dbHandler.existeCliente(email);
+            if (existe) {
+                Toast.makeText(this, "El correo electrónico ya está registrado", Toast.LENGTH_SHORT).show();
+                return;  // Detiene el flujo si el cliente ya existe
             }
-        });
 
-        buttonDarseDeAlta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(fieldName.getText())) {
-                    Toast.makeText(AltaPartner.this, "El campo Nombre es obligatorio", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(fielApellidos.getText())) {
-                    Toast.makeText(AltaPartner.this, "El campo Apellidos es obligatorio", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(filedDireccion.getText())) {
-                    Toast.makeText(AltaPartner.this, "El campo Direccion es obligatorio", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(fieldTelefono.getText())){
-                    Toast.makeText(AltaPartner.this, "El campo Telefono es obligatorio", Toast.LENGTH_SHORT).show();
-                }else if(TextUtils.isEmpty(fieldEmail.getText())){
-                    Toast.makeText(AltaPartner.this, "El campo Email es obligatorio", Toast.LENGTH_SHORT).show();
-                } else {
-                    try {
-                        // Aquí se implementaría la lógica para darse de alta.
-                        // Si se da de alta con éxito:
-                        Toast.makeText(AltaPartner.this, "Se ha dado de alta con éxito", Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
-                        // Si ocurre un error:
-                        Toast.makeText(AltaPartner.this, "No se ha podido dar de alta", Toast.LENGTH_SHORT).show();
-                    }
-                }
+            // Si no existe, insertar el nuevo cliente
+            boolean insertado = dbHandler.insertarCliente(nombre, apellidos, telefono, email);
+
+            if (insertado) {
+                Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AltaPartner.this, PartnersActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "Error al registrar el cliente", Toast.LENGTH_SHORT).show();
             }
-        });
+        }
+    }
+
+
+    private boolean validarCampos() {
+        if (TextUtils.isEmpty(fieldName.getText().toString().trim())) {
+            mostrarMensajeError("El campo Nombre es obligatorio");
+            return false;
+        }
+        if (TextUtils.isEmpty(fieldApellidos.getText().toString().trim())) {
+            mostrarMensajeError("El campo Apellidos es obligatorio");
+            return false;
+        }
+        if (TextUtils.isEmpty(fieldTelefono.getText().toString().trim())) {
+            mostrarMensajeError("El campo Teléfono es obligatorio");
+            return false;
+        }
+        if (TextUtils.isEmpty(fieldEmail.getText().toString().trim())) {
+            mostrarMensajeError("El campo Email es obligatorio");
+            return false;
+        }
+        return true;
+    }
+
+    private void mostrarMensajeError(String mensaje) {
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
     }
 }

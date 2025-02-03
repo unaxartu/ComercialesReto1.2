@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar Evento"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtEventTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Título del evento" />
+
+    <Button
+        android:id="@+id/btnSelectEventDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Fecha" />
+
+    <TextView
+        android:id="@+id/txtEventDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha: "
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/edtEventHour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Hora del evento (HH:MM)" />
+
+    <Button
+        android:id="@+id/btnSaveEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Evento" />
+
+</LinearLayout>

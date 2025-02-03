@@ -48,4 +48,6 @@ dependencies {
 
     // Agregada la dependencia de OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation ("mysql:mysql-connector-java:8.0.33")
+
 }
