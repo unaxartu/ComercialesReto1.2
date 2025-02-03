@@ -30,10 +30,7 @@ public class Login extends AppCompatActivity {
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
-        showUsersButton = findViewById(R.id.showUsersButton);
         connectionStatus = findViewById(R.id.connectionStatus);
-        usersList = findViewById(R.id.usersList);
-
         // Inicializar base de datos
         dbHandler = new DBHandler(this);
 

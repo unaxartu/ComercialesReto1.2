@@ -19,8 +19,8 @@
     <!-- Logo de la empresa centrado -->
     <ImageButton
         android:id="@+id/companyIconButton"
-        android:layout_width="305dp"
-        android:layout_height="40dp"
+        android:layout_width="260dp"
+        android:layout_height="41dp"
         android:layout_gravity="center"
         android:background="@null"
         android:contentDescription="logo"

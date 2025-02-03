@@ -6,148 +6,170 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="@+id/fieldEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fieldEmail">
 
         <!-- Imagen de fondo -->
         <ImageView
-            android:src="@drawable/paisaje_con_montanas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/paisaje_con_montanas" />
 
         <!-- Capa oscura con menor opacidad -->
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#99000000" /> <!-- Color negro con opacidad moderada -->
+            android:background="#74000000" /> <!-- Color negro con opacidad moderada -->
     </FrameLayout>
 
     <!-- Title TextView -->
     <TextView
         android:id="@+id/textView14"
         android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:background="@color/grey"
+        android:layout_height="0dp"
+        android:background="#D1CECE"
         android:gravity="center"
         android:text="Dar de alta al Partner"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Nombre TextView -->
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="637dp"
         android:text="Nombre"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/textView14"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/flechaAtras" />
 
     <!-- Nombre EditText -->
     <EditText
         android:id="@+id/fieldName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="text"
         android:hint="Nombre del usuario"
+        android:inputType="text"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/textView15"
+        android:textColorHint="#5CFFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textView16"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <!-- Apellidos TextView -->
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_width="63dp"
+        android:layout_height="0dp"
         android:text="Apellidos"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/fieldName"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/fieldApellidos"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/fieldName" />
 
     <!-- Apellidos EditText -->
     <EditText
         android:id="@+id/fieldApellidos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="text"
         android:hint="Apellidos del usuario"
+        android:inputType="text"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/textView16"
+        android:textColorHint="#4DFFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textView18"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <!-- Teléfono TextView -->
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="0dp"
         android:text="Teléfono"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/fieldApellidos"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/fieldTelefono"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/fieldApellidos" />
 
     <!-- Teléfono EditText -->
     <EditText
         android:id="@+id/fieldTelefono"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="phone"
         android:hint="+34 607617363"
+        android:inputType="phone"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/textView18"
+        android:textColorHint="#40FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textView19"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <!-- Email TextView -->
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="0dp"
         android:text="Email"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/fieldTelefono"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/fieldEmail"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/fieldTelefono" />
 
     <!-- Email EditText -->
     <EditText
         android:id="@+id/fieldEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
         android:hint="nombre@gmail.com"
+        android:inputType="textEmailAddress"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/textView19"
+        android:textColorHint="#59FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDarseDeAlta"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
     <!-- Botón de registro -->
     <Button
         android:id="@+id/buttonDarseDeAlta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="317dp"
         android:text="Dar de alta"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/fieldEmail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/fieldEmail" />
 
     <!-- Botón de regreso -->
     <ImageButton
         android:id="@+id/flechaAtras"
-        android:layout_width="51dp"
-        android:layout_height="49dp"
-        android:src="@drawable/flecha_atras_pedidos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="26dp"
+        android:background="#00FFFFFF"
         android:scaleType="fitCenter"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:src="@android:drawable/ic_menu_revert"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="@+id/textView15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
