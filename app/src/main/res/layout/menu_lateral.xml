@@ -1,54 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="280dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
+    android:background="#ABD3D3D3"
     android:orientation="vertical"
-    android:background="@color/menu_background"
-    android:padding="16dp"
-    >
+    android:padding="16dp">
 
-    <ImageButton
-        android:id="@+id/closeMenuButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="16dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Cerrar Menú"
-        android:src="@drawable/ic_close" />
-
-    <Button
-        android:id="@+id/agendaButton"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Agenda"
-        android:backgroundTint="@color/menu_button"
-        android:layout_marginBottom="8dp" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/partnersButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Partners"
-        android:backgroundTint="@color/menu_button"
-        android:layout_marginBottom="8dp" />
+        <ImageButton
+            android:id="@+id/closeMenuButton"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="59dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Cerrar Menú"
+            android:src="@drawable/ic_close"
+            app:layout_constraintBottom_toTopOf="@+id/agendaButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/ordersButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pedidos"
-        android:backgroundTint="@color/menu_button"
-        android:layout_marginBottom="8dp" />
+        <Button
+            android:id="@+id/agendaButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="74dp"
+            android:backgroundTint="@color/menu_button"
+            android:text="Agenda"
+            app:layout_constraintBottom_toTopOf="@+id/partnersButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/closeMenuButton" />
 
-    <Button
-        android:id="@+id/sendDelegationsButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/menu_button"
-        android:text="Enviar Delegaciones" />
+        <Button
+            android:id="@+id/partnersButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="76dp"
+            android:backgroundTint="@color/menu_button"
+            android:text="Partners"
+            app:layout_constraintBottom_toTopOf="@+id/ordersButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/agendaButton" />
+
+        <Button
+            android:id="@+id/ordersButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="86dp"
+            android:backgroundTint="@color/menu_button"
+            android:text="Pedidos"
+            app:layout_constraintBottom_toTopOf="@+id/sendDelegationsButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/partnersButton" />
+
+        <Button
+            android:id="@+id/sendDelegationsButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="134dp"
+            android:backgroundTint="@color/menu_button"
+            android:text="Enviar Delegaciones"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ordersButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Botón de cerrar el menú con un icono de X -->
 </LinearLayout>
