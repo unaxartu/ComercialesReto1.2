@@ -154,7 +154,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Empresa:" />
+                    android:text="Nombre:" />
 
                 <TextView
                     android:id="@+id/empresaNombre"
@@ -164,7 +164,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Contacto:" />
+                    android:text="Apellido:" />
 
                 <TextView
                     android:id="@+id/contactoNombre"
@@ -174,25 +174,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Teléfono:" />
-
-                <TextView
-                    android:id="@+id/direccionCliente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email:" />
+                    android:text="Telefono:" />
 
                 <TextView
                     android:id="@+id/telefonoCliente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/emailCliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>

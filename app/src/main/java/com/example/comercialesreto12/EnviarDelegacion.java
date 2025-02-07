@@ -24,6 +24,10 @@ public class EnviarDelegacion extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_delegacion);
+        setupDrawerMenu();
+        setupInfoButton();
+        setupCompanyIconButton();
+        setButtonActions();
 
         // Inicializar el DBHandler
         try {

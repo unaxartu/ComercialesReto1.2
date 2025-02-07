@@ -28,6 +28,8 @@
             android:background="#74000000" /> <!-- Color negro con opacidad moderada -->
     </FrameLayout>
 
+    <include layout="@layout/header"/>
+
     <!-- Title TextView -->
     <TextView
         android:id="@+id/textView14"
