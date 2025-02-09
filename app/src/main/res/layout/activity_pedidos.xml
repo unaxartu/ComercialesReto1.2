@@ -9,24 +9,26 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <!-- Imagen de fondo -->
         <ImageView
             android:src="@drawable/paisaje_con_montanas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
-
+        <!-- Capa oscura con menor opacidad -->
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#99000000" />
 
+        <!-- Header -->
         <include layout="@layout/header" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- Título "Selecciona el cliente" -->
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
@@ -41,17 +43,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- Spinner para seleccionar cliente -->
             <Spinner
                 android:id="@+id/spinnerCliente"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="159dp"
+                android:layout_marginBottom="15dp"
                 android:background="#81FFFFFF"
                 app:layout_constraintBottom_toTopOf="@+id/cardView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+            <!-- CardView para mostrar información del cliente -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="0dp"
@@ -65,8 +69,103 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerCliente">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Título de la sección -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Información del Cliente"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <!-- Nombre -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre:" />
+
+                    <TextView
+                        android:id="@+id/empresaNombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <!-- Apellido -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apellido:" />
+
+                    <TextView
+                        android:id="@+id/contactoNombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <!-- Dirección -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dirección:" />
+
+                    <TextView
+                        android:id="@+id/direccionCliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <!-- Teléfono -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Teléfono:" />
+
+                    <TextView
+                        android:id="@+id/telefonoCliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <!-- Email -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email:" />
+
+                    <TextView
+                        android:id="@+id/emailCliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <!-- CIF -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CIF:" />
+
+                    <TextView
+                        android:id="@+id/cifCliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <!-- Nombre de la Empresa -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombre de la Empresa:" />
+
+                    <TextView
+                        android:id="@+id/nombreEmpresaCliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <!-- Botón para agregar un nuevo pedido -->
             <ImageButton
                 android:id="@+id/ImagebtnAddPedido"
                 android:layout_width="43dp"
@@ -80,6 +179,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardView"
                 app:srcCompat="@android:drawable/ic_input_add" />
 
+            <!-- ScrollView para mostrar los pedidos agregados -->
             <ScrollView
                 android:id="@+id/scrollView2"
                 android:layout_width="0dp"
@@ -96,12 +196,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <!-- Spinner para seleccionar productos -->
                     <Spinner
                         android:id="@+id/spinnerArticulos"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone" />
 
+                    <!-- Contenedor para los pedidos -->
                     <LinearLayout
                         android:id="@+id/containerPedidos"
                         android:layout_width="411dp"
@@ -109,10 +211,10 @@
                         android:background="#C6F1EDED"
                         android:orientation="vertical"
                         android:padding="8dp"></LinearLayout>
-
                 </LinearLayout>
             </ScrollView>
 
+            <!-- Botón para enviar el pedido -->
             <Button
                 android:id="@+id/botonPedido"
                 android:layout_width="0dp"
@@ -125,67 +227,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/scrollView2"
                 app:rippleColor="#EFE1E1" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="412dp"
-                android:layout_height="177dp"
-                android:layout_marginTop="34dp"
-                android:layout_marginBottom="38dp"
-                android:background="#CFCBCB"
-                android:orientation="vertical"
-                android:padding="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/ImagebtnAddPedido"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/spinnerCliente"
-                app:layout_constraintVertical_bias="0.0">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Información del Cliente"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre:" />
-
-                <TextView
-                    android:id="@+id/empresaNombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apellido:" />
-
-                <TextView
-                    android:id="@+id/contactoNombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Telefono:" />
-
-                <TextView
-                    android:id="@+id/telefonoCliente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </FrameLayout>
 
+    <!-- Menú lateral -->
     <include layout="@layout/menu_lateral" />
-
 </androidx.drawerlayout.widget.DrawerLayout>

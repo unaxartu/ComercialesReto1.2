@@ -19,6 +19,10 @@ public class ConsultaPartner extends AppCompatActivity {
         setContentView(R.layout.activity_consulta_partner);
 
         Log.d("ConsultaPartner", "Iniciando actividad...");
+        DBHandler dbHandler = new DBHandler(this);
+
+        // Imprimir todos los clientes en el log
+        dbHandler.printAllClientes();
 
         ListView listView = findViewById(R.id.listView);
         ImageButton buttonBack = findViewById(R.id.flechaAtrasConsultaPartners);
@@ -29,9 +33,7 @@ public class ConsultaPartner extends AppCompatActivity {
         }
 
         // Obtener los clientes desde la base de datos
-        DBHandler dbHandler = new DBHandler(this);
         List<String> nombresCompletos = dbHandler.obtenerPartners();
-
         if (nombresCompletos.isEmpty()) {
             Log.e("ConsultaPartner", "No se encontraron partners en la base de datos");
             Toast.makeText(this, "No hay partners registrados", Toast.LENGTH_SHORT).show();

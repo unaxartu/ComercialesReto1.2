@@ -1,21 +1,27 @@
 package com.example.comercialesreto12;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EnviarDelegacion extends MainActivity {
-
     private DBHandler dbHandler;
     private ListView listViewPedidos;
     private Button botonDelegacion;
@@ -24,98 +30,143 @@ public class EnviarDelegacion extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_delegacion);
+
         setupDrawerMenu();
         setupInfoButton();
         setupCompanyIconButton();
         setButtonActions();
 
-        // Inicializar el DBHandler
-        try {
-            dbHandler = new DBHandler(this);
-        } catch (Exception e) {
-            Log.e("EnviarDelegacion", "Error al inicializar la base de datos", e);
-            Toast.makeText(this, "Error al inicializar la base de datos", Toast.LENGTH_SHORT).show();
-            return;  // Detener el proceso si no se puede inicializar la base de datos
-        }
+        dbHandler = new DBHandler(this);
 
-        // Configurar el ListView
         listViewPedidos = findViewById(R.id.listViewPedidos);
         botonDelegacion = findViewById(R.id.botonDelegacion);
 
-        // Obtener los pedidos pendientes desde la base de datos
-        List<String> pedidosPendientes = null;
-        try {
-            pedidosPendientes = dbHandler.obtenerPedidosPendientes();
-        } catch (Exception e) {
-            Log.e("EnviarDelegacion", "Error al obtener los pedidos pendientes", e);
-            Toast.makeText(this, "Error al obtener los pedidos", Toast.LENGTH_SHORT).show();
-        }
+        refrescarListaPedidos();
 
-        // Verifica que la lista no sea null o vacía
-        if (pedidosPendientes == null || pedidosPendientes.isEmpty()) {
-            // Si es null o vacía, crea una lista vacía
-            pedidosPendientes = new ArrayList<>();
-            Log.w("EnviarDelegacion", "No hay pedidos pendientes para mostrar.");
-        }
-
-        // Hacer pedidosPendientes final
-        final List<String> finalPedidosPendientes = pedidosPendientes;
-
-        // Crear el adaptador para el ListView
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, finalPedidosPendientes);
-        listViewPedidos.setAdapter(adapter);
-
-        // Configurar el click en un item de la lista
-        listViewPedidos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Aquí puedes manejar lo que pasa cuando seleccionas un pedido
-                String pedidoSeleccionado = finalPedidosPendientes.get(position);
-                Toast.makeText(EnviarDelegacion.this, "Pedido seleccionado: " + pedidoSeleccionado, Toast.LENGTH_SHORT).show();
-            }
+        listViewPedidos.setOnItemClickListener((parent, view, position, id) -> {
+            String pedidoSeleccionado = (String) parent.getItemAtPosition(position);
+            Toast.makeText(EnviarDelegacion.this, "Pedido seleccionado: " + pedidoSeleccionado, Toast.LENGTH_SHORT).show();
         });
 
-        // Configurar el botón para enviar la delegación
-        botonDelegacion.setOnClickListener(new View.OnClickListener() {
+        botonDelegacion.setOnClickListener(v -> enviarDelegacionAPedidosAPI());
+    }
+
+    private List<String> obtenerPedidosFormateados() {
+        List<String> pedidosFormateados = new ArrayList<>();
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT id_pedido, id_cliente, fecha_pedido, id_experiencia, cantidad, n_pedido FROM " + DBHandler.TABLE_PEDIDOS;
+            cursor = db.rawQuery(query, null);
+
+            while (cursor.moveToNext()) {
+                int idPedido = cursor.getInt(cursor.getColumnIndexOrThrow("id_pedido"));
+                int idCliente = cursor.getInt(cursor.getColumnIndexOrThrow("id_cliente"));
+                int idExperiencia = cursor.getInt(cursor.getColumnIndexOrThrow("id_experiencia"));
+                String fechaPedido = cursor.getString(cursor.getColumnIndexOrThrow("fecha_pedido"));
+                int cantidad = cursor.getInt(cursor.getColumnIndexOrThrow("cantidad"));
+                int nPedido = cursor.getInt(cursor.getColumnIndexOrThrow("n_pedido"));
+
+                String pedido = "Pedido ID: " + idPedido +
+                        ", Cliente ID: " + idCliente +
+                        ", Fecha: " + fechaPedido +
+                        ", Experiencia ID: " + idExperiencia +
+                        ", Cantidad: " + cantidad +
+                        ", Número de Pedido: " + nPedido;
+                pedidosFormateados.add(pedido);
+            }
+        } catch (Exception e) {
+            Log.e("EnviarDelegacion", "Error al obtener pedidos", e);
+        } finally {
+            if (cursor != null) cursor.close();
+            db.close();
+        }
+
+        return pedidosFormateados;
+    }
+
+    private void enviarDelegacionAPedidosAPI() {
+        SQLiteDatabase db = dbHandler.getReadableDatabase();
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT id_pedido, id_cliente, fecha_pedido, id_experiencia, cantidad, n_pedido FROM " + DBHandler.TABLE_PEDIDOS;
+            cursor = db.rawQuery(query, null);
+
+            while (cursor.moveToNext()) {
+                int idPedido = cursor.getInt(cursor.getColumnIndexOrThrow("id_pedido"));
+                int idCliente = 1;
+                int idExperiencia = cursor.getInt(cursor.getColumnIndexOrThrow("id_experiencia"));
+                String fechaPedido = convertirFecha(cursor.getString(cursor.getColumnIndexOrThrow("fecha_pedido")));
+                int cantidad = cursor.getInt(cursor.getColumnIndexOrThrow("cantidad"));
+                int nPedido = cursor.getInt(cursor.getColumnIndexOrThrow("n_pedido"));
+
+                PedidoRequest pedidoRequest = new PedidoRequest(idCliente, idExperiencia, fechaPedido, cantidad, nPedido);
+                enviarPedidoAPedidosAPI(pedidoRequest, idPedido);
+            }
+        } catch (Exception e) {
+            Log.e("EnviarDelegacion", "Error al leer pedidos", e);
+        } finally {
+            if (cursor != null) cursor.close();
+            db.close();
+        }
+    }
+
+    private void enviarPedidoAPedidosAPI(PedidoRequest pedidoRequest, int pedidoId) {
+        Log.d("EnviarDelegacion", "Enviando pedido: " +
+                " Cliente: " + pedidoRequest.getIdCliente() +
+                " Experiencia: " + pedidoRequest.getIdExperiencia() +
+                " Fecha: " + pedidoRequest.getFechaPedido() +
+                " Cantidad: " + pedidoRequest.getCantidad() +
+                " N_Pedido: " + pedidoRequest.getNPedido()
+        );
+
+        ApiService apiService = RetrofitClient.getApiService();
+        Call<Void> call = apiService.enviarPedido(pedidoRequest);
+
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onClick(View v) {
-                // Lógica para enviar la delegación
-                enviarDelegacion(finalPedidosPendientes);
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    dbHandler.eliminarPedido(pedidoId);
+                    Log.d("EnviarDelegacion", "Pedido enviado y eliminado: " + pedidoId);
+                    Toast.makeText(EnviarDelegacion.this, "Pedido enviado correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        Log.e("EnviarDelegacion", "Error al enviar pedido. Código: " + response.code() +
+                                " - " + response.errorBody().string());
+                    } catch (Exception e) {
+                        Log.e("EnviarDelegacion", "Error al leer el error", e);
+                    }
+                    Toast.makeText(EnviarDelegacion.this, "Error al enviar el pedido", Toast.LENGTH_SHORT).show();
+                }
+                refrescarListaPedidos();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("EnviarDelegacion", "Fallo en el envío", t);
+                Toast.makeText(EnviarDelegacion.this, "Error al enviar el pedido", Toast.LENGTH_SHORT).show();
+                refrescarListaPedidos();
             }
         });
     }
 
-    // Método para enviar la delegación
-    private void enviarDelegacion(List<String> pedidosPendientes) {
-        if (pedidosPendientes.isEmpty()) {
-            // Si no hay pedidos pendientes, muestra un mensaje
-            Toast.makeText(this, "No hay pedidos pendientes para enviar.", Toast.LENGTH_SHORT).show();
-        } else {
-            // Aquí puedes implementar la lógica para enviar la delegación
-            // Esto puede incluir marcar los pedidos como enviados en la base de datos
-
-            for (String pedido : pedidosPendientes) {
-                try {
-                    // Extraer el pedidoId desde el string
-                    int pedidoId = dbHandler.obtenerPedidoIdDesdeString(pedido);
-
-                    // Verifica si el pedidoId es válido
-                    if (pedidoId != -1) {
-                        // Aquí puedes actualizar el estado del pedido en la base de datos
-                        dbHandler.marcarPedidoComoEnviado(pedidoId);
-                        Log.d("EnviarDelegacion", "Pedido enviado: " + pedidoId);
-                    } else {
-                        Log.w("EnviarDelegacion", "Pedido no encontrado en la base de datos: " + pedido);
-                    }
-
-                } catch (Exception e) {
-                    Log.e("EnviarDelegacion", "Error al procesar el pedido: " + pedido, e);
-                    Toast.makeText(this, "Error al procesar el pedido: " + pedido, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            // Mostrar mensaje de éxito
-            Toast.makeText(this, "Delegación enviada con éxito.", Toast.LENGTH_SHORT).show();
+    private void refrescarListaPedidos() {
+        List<String> pedidos = obtenerPedidosFormateados();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, pedidos);
+        listViewPedidos.setAdapter(adapter);
+    }
+    private String convertirFecha(String fechaOriginal) {
+        try {
+            // Intentar detectar el formato original
+            SimpleDateFormat formatoEntrada = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            return formatoSalida.format(formatoEntrada.parse(fechaOriginal));
+        } catch (Exception e) {
+            Log.e("EnviarDelegacion", "Error al convertir la fecha", e);
+            return "2025-01-01"; // Valor por defecto para evitar errores
         }
     }
 }

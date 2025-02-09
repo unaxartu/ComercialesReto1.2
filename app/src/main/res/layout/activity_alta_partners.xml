@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- FrameLayout con imagen de fondo -->
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
@@ -13,14 +14,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fieldEmail">
-
         <!-- Imagen de fondo -->
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/paisaje_con_montanas" />
-
         <!-- Capa oscura con menor opacidad -->
         <View
             android:layout_width="match_parent"
@@ -28,13 +27,14 @@
             android:background="#74000000" /> <!-- Color negro con opacidad moderada -->
     </FrameLayout>
 
-    <include layout="@layout/header"/>
+    <!-- Header -->
+    <include layout="@layout/header" />
 
     <!-- Title TextView -->
     <TextView
         android:id="@+id/textView14"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="#D1CECE"
         android:gravity="center"
         android:text="Dar de alta al Partner"
@@ -49,11 +49,9 @@
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="637dp"
+        android:layout_height="wrap_content"
         android:text="Nombre"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/frameLayout"
         app:layout_constraintTop_toBottomOf="@+id/flechaAtras" />
 
@@ -66,7 +64,6 @@
         android:inputType="text"
         android:textColor="@color/white"
         android:textColorHint="#5CFFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/textView16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
@@ -74,11 +71,10 @@
     <!-- Apellidos TextView -->
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="63dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Apellidos"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/fieldApellidos"
         app:layout_constraintStart_toStartOf="@+id/frameLayout"
         app:layout_constraintTop_toBottomOf="@+id/fieldName" />
 
@@ -91,21 +87,42 @@
         android:inputType="text"
         android:textColor="@color/white"
         android:textColorHint="#4DFFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/textView18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <!-- Dirección TextView -->
+    <TextView
+        android:id="@+id/textViewDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dirección"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/fieldApellidos" />
+
+    <!-- Dirección EditText -->
+    <EditText
+        android:id="@+id/fieldDireccion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Dirección del usuario"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textColorHint="#4DFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDireccion" />
 
     <!-- Teléfono TextView -->
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:text="Teléfono"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/fieldTelefono"
         app:layout_constraintStart_toStartOf="@+id/frameLayout"
-        app:layout_constraintTop_toBottomOf="@+id/fieldApellidos" />
+        app:layout_constraintTop_toBottomOf="@+id/fieldDireccion" />
 
     <!-- Teléfono EditText -->
     <EditText
@@ -116,7 +133,6 @@
         android:inputType="phone"
         android:textColor="@color/white"
         android:textColorHint="#40FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/textView19"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
@@ -125,10 +141,9 @@
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:text="Email"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/fieldEmail"
         app:layout_constraintStart_toStartOf="@+id/frameLayout"
         app:layout_constraintTop_toBottomOf="@+id/fieldTelefono" />
 
@@ -141,37 +156,78 @@
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
         android:textColorHint="#59FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/buttonDarseDeAlta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <!-- CIF TextView -->
+    <TextView
+        android:id="@+id/textViewCif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CIF"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/fieldEmail" />
+
+    <!-- CIF EditText -->
+    <EditText
+        android:id="@+id/fieldCif"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="CIF de la empresa"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textColorHint="#4DFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCif" />
+
+    <!-- Nombre Empresa TextView -->
+    <TextView
+        android:id="@+id/textViewNombreEmpresa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre de la Empresa"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/fieldCif" />
+
+    <!-- Nombre Empresa EditText -->
+    <EditText
+        android:id="@+id/fieldNombreEmpresa"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de la empresa"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textColorHint="#4DFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreEmpresa" />
 
     <!-- Botón de registro -->
     <Button
         android:id="@+id/buttonDarseDeAlta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="317dp"
         android:text="Dar de alta"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fieldEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/fieldNombreEmpresa" />
 
     <!-- Botón de regreso -->
     <ImageButton
         android:id="@+id/flechaAtras"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="26dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
         android:src="@android:drawable/ic_menu_revert"
         app:layout_constraintBottom_toTopOf="@+id/textView15"
-        app:layout_constraintEnd_toEndOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
