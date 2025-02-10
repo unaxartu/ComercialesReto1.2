@@ -4,6 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Imagen de fondo -->
+        <ImageView
+            android:src="@drawable/paisaje_con_montanas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <!-- Capa oscura con menor opacidad -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000" /> <!-- Color negro con opacidad moderada -->
+    </FrameLayout>
+
     <!-- Contenido principal de la actividad -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +35,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <!-- Título de la actividad -->
             <TextView
@@ -25,142 +44,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Envío de Delegación"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:layout_margin="16dp" />
+                android:layout_marginBottom="16dp" />
 
-            <!-- Vista de formulario para completar los detalles del pedido -->
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Organiza y envía la delegación"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:layout_margin="16dp"
-                android:gravity="center" />
-
-            <!-- Fecha -->
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Fecha: "
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/editTextFecha"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="08/10/2024"
-                android:inputType="date"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Nombre de la empresa -->
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Nombre de la empresa"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/fieldNameEmpresa"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="Ingrese el nombre"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Nombre del contacto -->
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Nombre del contacto"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/fieldNameContacto"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="Ingrese el contacto"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Dirección -->
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Dirección"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/fieldDireccion"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="Ingrese la dirección"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Teléfono -->
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Teléfono"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/fieldTelefono"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="Ingrese el teléfono"
-                android:inputType="phone"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <!-- Email -->
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:text="Email"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:id="@+id/fieldEmail"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@color/grey"
-                android:hint="nombre@correo.com"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/black"
-                android:layout_margin="8dp" />
+            <!-- Lista de pedidos pendientes -->
+            <ListView
+                android:id="@+id/listViewPedidos"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#7CFFFFFF"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="1dp"
+                android:padding="8dp" />
 
             <!-- Botón para enviar la delegación -->
             <Button
@@ -168,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Enviar Delegación"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="16dp" />
 
         </LinearLayout>
 

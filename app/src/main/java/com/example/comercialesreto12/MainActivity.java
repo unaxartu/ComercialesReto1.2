@@ -3,10 +3,13 @@ package com.example.comercialesreto12;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -34,7 +37,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         setButtonActions();
+        setupInfoButton();
+        setupCompanyIconButton();
+    }
+
+    public void setupCompanyIconButton() {
+        // Encuentra el ImageButton del icono de la empresa
+        ImageButton companyIconButton = findViewById(R.id.companyIconButton);
+
+        // Establece un OnClickListener para regresar a MainActivity cuando se presione el icono
+        companyIconButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent); // Inicia MainActivity
+            finish(); // Finaliza AgendaActivity (para evitar que se quede en la pila)
+        });
     }
 
     public void setButtonActions() {
@@ -110,7 +128,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setupInfoButton() {
+        // Encuentra el ImageButton de información
+        ImageButton infoButton = findViewById(R.id.infoButton);
+
+        // Establece un OnClickListener para mostrar el pop-up cuando se presione el botón
+        infoButton.setOnClickListener(v -> showInfoDialog());
+    }
+
     public void showInfoDialog() {
+        // Los elementos que aparecerán en el pop-up
         CharSequence[] items = new CharSequence[]{
                 "Lorem ipsum dolor sit amet",
                 "Consectetur adipiscing elit",
@@ -119,12 +146,15 @@ public class MainActivity extends AppCompatActivity {
                 "Sed cursus ante dapibus diam"
         };
 
-        new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this)
+        // Crea y muestra el diálogo de información
+        new AlertDialog.Builder(MainActivity.this)
                 .setTitle("Información")
-                .setItems(items, null)
-                .setPositiveButton("Cerrar", null)
+                .setItems(items, null) // Mostrar la lista de elementos
+                .setPositiveButton("Cerrar", null) // Botón para cerrar el pop-up
                 .show();
     }
+
+
 
     public void openWebsite() {
         String url = "http://remoto.cebanc.com:20203";

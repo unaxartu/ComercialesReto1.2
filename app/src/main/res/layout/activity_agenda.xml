@@ -4,6 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Imagen de fondo -->
+        <ImageView
+            android:src="@drawable/paisaje_con_montanas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <!-- Capa oscura con menor opacidad -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000" /> <!-- Color negro con opacidad moderada -->
+    </FrameLayout>
+
     <!-- Contenido principal de la actividad -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +35,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <!-- Título para la agenda -->
             <TextView
@@ -25,25 +44,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Mi Agenda"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:layout_margin="16dp" />
+                android:layout_marginBottom="16dp" />
 
-            <!-- Vista de calendario -->
-            <CalendarView
-                android:id="@+id/calendar_view"
+            <!-- Botón para abrir el DatePickerDialog -->
+            <Button
+                android:id="@+id/btnSelectDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:text="Seleccionar Fecha" />
+
+            <!-- Texto que mostrará la fecha seleccionada -->
+            <TextView
+                android:id="@+id/txtSelectedDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha seleccionada: "
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginTop="8dp"/>
 
             <!-- Lista de eventos seleccionados -->
             <ListView
                 android:id="@+id/event_list_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="220dp"
                 android:layout_weight="1"
-                android:padding="8dp" />
+                android:background="#75808080"
+                android:padding="8dp"
+                android:textColor="@color/white"/>
 
             <!-- Botón para agregar un nuevo evento -->
             <Button
@@ -51,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Agregar Evento"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="16dp" />
         </LinearLayout>
 
         <!-- Pie de página del menú (footer) -->

@@ -1,44 +1,53 @@
 package com.example.comercialesreto12;
 
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class ConsultaPartner extends AppCompatActivity {
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {  // Cambiar 'OnCreate' a 'onCreate'
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consulta_partner);  // Asegúrate de que 'agenda.xml' exista en tu carpeta 'res/layout'
+        setContentView(R.layout.activity_consulta_partner);
+
+        Log.d("ConsultaPartner", "Iniciando actividad...");
+        DBHandler dbHandler = new DBHandler(this);
+
+        // Imprimir todos los clientes en el log
+        dbHandler.printAllClientes();
+
         ListView listView = findViewById(R.id.listView);
+        ImageButton buttonBack = findViewById(R.id.flechaAtrasConsultaPartners);
 
-        // Datos para el ListView
-        String[] nombres = {"Javi", "Unax", "Yeray", "Aitor"};
-        String[] apellidos = {"Carmona", "Artuzamonoa", "Martínez", "Lopez"};
-
-        // Crear un array combinado
-        String[] nombresCompletos = new String[nombres.length];
-        for (int i = 0; i < nombres.length; i++) {
-            nombresCompletos[i] = nombres[i] + "                              " + apellidos[i];
+        if (listView == null) {
+            Log.e("ConsultaPartner", "Error: ListView no encontrado en el layout");
+            return;
         }
 
-        // Crear un ArrayAdapter
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nombresCompletos);
+        // Obtener los clientes desde la base de datos
+        List<String> nombresCompletos = dbHandler.obtenerPartners();
+        if (nombresCompletos.isEmpty()) {
+            Log.e("ConsultaPartner", "No se encontraron partners en la base de datos");
+            Toast.makeText(this, "No hay partners registrados", Toast.LENGTH_SHORT).show();
+        }
 
-        // Asignar el adaptador al ListView
+        // Adaptador para la lista
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nombresCompletos);
         listView.setAdapter(adapter);
 
-        ImageButton buttonBack = findViewById(R.id.flechaAtrasConsultaPartners);
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish(); // Cierra la actividad actual
-            }
-        });
+        // Botón para volver atrás
+        if (buttonBack != null) {
+            buttonBack.setOnClickListener(v -> finish());
+        }
 
+        Log.d("ConsultaPartner", "Configuración completada con éxito");
     }
 }
